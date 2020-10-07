@@ -137,6 +137,7 @@ GameObject:
   - component: {fileID: 436274872}
   - component: {fileID: 436274878}
   - component: {fileID: 436274877}
+  - component: {fileID: 436274879}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -156,8 +157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c702140c0218124f8044b5bfe2b7aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xvel: 0
-  zvel: 0
   acc: 1
   speedlimit: 8
   InitialSpeed: 2
@@ -376,6 +375,18 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &436274879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436274870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 688ac191d27344f4b92108bd95078f07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &554003540
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,7 +807,7 @@ GameObject:
   - component: {fileID: 1764112303}
   - component: {fileID: 1764112302}
   - component: {fileID: 1764112301}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Death Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
