@@ -6,8 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     //TODO: Make it so this is physics based 
     Vector3 MoveVector = new Vector3(0, 0, 0);
-    public float xvel = 0;
-    public float zvel = 0;
+    float zvel = 0;
     public float acc = 0.001f;
     public float speedlimit = 0.5f;
     public float InitialSpeed = 0.1f;
@@ -23,14 +22,11 @@ public class PlayerMovement : MonoBehaviour
     bool SpaceDown;
     bool DDown;
     bool ADown;
-
-    CapsuleCollider collider;
     Rigidbody rigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
-        collider = GetComponent<CapsuleCollider>();
         rigidBody = GetComponent<Rigidbody>();
     }
 
@@ -39,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         ADown = Input.GetKey(KeyCode.A);
         DDown = Input.GetKey(KeyCode.D);
     }
+
 
     void FixedUpdate()
     {

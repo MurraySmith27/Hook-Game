@@ -28,8 +28,6 @@ public class GrapplingScript : MonoBehaviour
     void Awake()
     {
         lr = GetComponent<LineRenderer>();
-
-        Debug.Log("I'm Dead!");
     }
 
 
