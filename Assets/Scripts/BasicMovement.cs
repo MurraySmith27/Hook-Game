@@ -14,12 +14,12 @@ public class BasicMovement : MonoBehaviour
     // each second the player speeds up by 0.25 m/s
     const float Accel = 2.5f;
     
-    public int zDirection;
-    public bool needToJump;
+    int zDirection;
+    bool needToJump;
 
     // jump buffer
     public float jumpBuffer;
-    public bool isGrounded = true;
+    bool isGrounded = true;
 
     CapsuleCollider col;
     Rigidbody rig;
@@ -71,7 +71,7 @@ public class BasicMovement : MonoBehaviour
 
         if (needToJump && jumpBuffer <= 0)
         {
-            rig.AddForce(new Vector3(0, (float)Math.Sqrt(Physics.gravity.y * -2 * JumpDistance), 0), ForceMode.VelocityChange);
+            rig.AddForce(new Vector3(0, (float)Math.Sqrt(Physics.gravity.y * -2 * JumpDistance), 0), ForceMode.Impulse);
         }
 
         needToJump = false;
