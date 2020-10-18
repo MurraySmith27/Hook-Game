@@ -36,6 +36,7 @@ public class GrapplingMovement : MonoBehaviour
         }
 
         ProcessGrappleTo();
+        ProcessGrappleFrom();
 
     }
 
@@ -71,7 +72,24 @@ public class GrapplingMovement : MonoBehaviour
         }
 
         rig.AddForce(dst - src, ForceMode.Acceleration); 
+    }
 
+    void ProcessGrappleFrom()
+    {
+        if (grappleFrom == null)
+            return;
+        
+        var src = grappleFrom.transform.position;
+        var dst = transform.position;
+
+        float distance = Vector3.Distance(src, dst);
+
+        if (distance < StopThreshold)
+        {
+            grappleFrom = null;
+        }
+
+        grappleFrom.GetComponent<Rigidbody>().AddForce(dst - src, ForceMode.Acceleration);
     }
 
     public bool IsGrapplingTo()

@@ -141,9 +141,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294962525}
   serializedVersion: 2
-  m_Mass: 42.424
+  m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294962525}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 688ac191d27344f4b92108bd95078f07, type: 3}
   m_Name: 
@@ -279,21 +279,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294962525}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af69c198c1b7ce046b7f69980c5b2bc0, type: 3}
+  m_Script: {fileID: 11500000, guid: febd4923771ac9f469a6de727c38d972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatIsGrapplable:
-    serializedVersion: 2
-    m_Bits: 256
-  grapplePointOnPlayer: {fileID: 1536173657}
-  maxDistanceMultiplierForJoint: 0
-  minDistanceMultiplierForJoint: 0
-  JointSpring: 65
-  JointDamper: 7
-  JointMassScale: 4.5
-  DeleteJointThreshold: 2
 --- !u!114 &294962532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,7 +291,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294962525}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c702140c0218124f8044b5bfe2b7aa5, type: 3}
   m_Name: 
@@ -327,6 +317,7 @@ GameObject:
   - component: {fileID: 436274878}
   - component: {fileID: 436274877}
   - component: {fileID: 436274879}
+  - component: {fileID: 436274880}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -341,7 +332,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436274870}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c702140c0218124f8044b5bfe2b7aa5, type: 3}
   m_Name: 
@@ -434,7 +425,7 @@ Rigidbody:
   m_GameObject: {fileID: 436274870}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -567,9 +558,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436274870}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 688ac191d27344f4b92108bd95078f07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &436274880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436274870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: febd4923771ac9f469a6de727c38d972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &554003540
@@ -834,7 +837,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: -0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0.07, y: -7.41, z: -0}
+  m_LocalPosition: {x: 0.12, y: -16.63, z: 6.96}
   m_LocalScale: {x: 0.02357156, y: 0.032773897, z: 0.023571566}
   m_Children: []
   m_Father: {fileID: 294962526}
@@ -855,7 +858,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 9c2c98ded1664f4448101f6ca7718949,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: -3.94
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9c2c98ded1664f4448101f6ca7718949,
         type: 3}
@@ -952,7 +955,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1435189295}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1

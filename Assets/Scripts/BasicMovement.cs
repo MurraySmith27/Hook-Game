@@ -25,20 +25,19 @@ public class BasicMovement : MonoBehaviour
     Rigidbody rig;
 
     // used to check if the player is grappling to something
-    NewGrapplingScript script;
+    GrapplingMovement script;
+    MovementController controller;
 
-    void Start()
+    void Awake()
     {
         col = GetComponent<CapsuleCollider>();
         rig = GetComponent<Rigidbody>();
-        script = GetComponent<NewGrapplingScript>();
+        script = GetComponent<GrapplingMovement>();
+        controller = GetComponent<MovementController>();
     }
 
     void Update()
     {
-        if (script.IsGrapplingTo())
-            return;
-        
         if (Input.GetKey(KeyCode.Space))
         {
             needToJump = true;
@@ -59,30 +58,26 @@ public class BasicMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (script.IsGrapplingTo())
-            return;
         HandleKeyboardMouseInputs();
     }
 
     void HandleKeyboardMouseInputs()
     {
-        bool isGroundedNow = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), transform.localScale.y / 2.0f + 0.01f);
-
         // always reset buffer to JumpBufferTime if not grounded
-        if (!isGrounded && isGroundedNow || !isGroundedNow)
+        if (!controller.isGrounded)
         {
             jumpBuffer = JumpBufferTime;
         }
-        isGrounded = isGroundedNow;
 
         if (needToJump && jumpBuffer <= 0)
         {
             rig.AddForce(new Vector3(0, (float)Math.Sqrt(Physics.gravity.y * -2 * JumpDistance), 0), ForceMode.VelocityChange);
         }
+
         needToJump = false;
         jumpBuffer -= Time.fixedDeltaTime;
 
-        if (zDirection == 0)
+        if (zDirection == 0 && controller.isGrounded)
         {
             rig.velocity = new Vector3(rig.velocity.x, rig.velocity.y, 0);
         }
