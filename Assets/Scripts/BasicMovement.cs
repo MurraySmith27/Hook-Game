@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class BasicMovement : MonoBehaviour
 {
     const float MidAirMultiplier = 0.5f;
     const float SpeedLimit = 15f;
@@ -24,14 +24,21 @@ public class PlayerMovement : MonoBehaviour
     CapsuleCollider col;
     Rigidbody rig;
 
+    // used to check if the player is grappling to something
+    NewGrapplingScript script;
+
     void Start()
     {
         col = GetComponent<CapsuleCollider>();
         rig = GetComponent<Rigidbody>();
+        script = GetComponent<NewGrapplingScript>();
     }
 
     void Update()
     {
+        if (script.IsGrapplingTo())
+            return;
+        
         if (Input.GetKey(KeyCode.Space))
         {
             needToJump = true;
@@ -52,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (script.IsGrapplingTo())
+            return;
         HandleKeyboardMouseInputs();
     }
 
