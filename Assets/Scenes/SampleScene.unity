@@ -296,10 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c702140c0218124f8044b5bfe2b7aa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zDirection: 0
-  needToJump: 0
-  jumpBuffer: 0
-  isGrounded: 1
 --- !u!1 &436274870
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,13 +307,13 @@ GameObject:
   - component: {fileID: 436274875}
   - component: {fileID: 436274874}
   - component: {fileID: 436274873}
-  - component: {fileID: 436274871}
   - component: {fileID: 436274876}
   - component: {fileID: 436274872}
   - component: {fileID: 436274878}
-  - component: {fileID: 436274877}
   - component: {fileID: 436274879}
   - component: {fileID: 436274880}
+  - component: {fileID: 436274871}
+  - component: {fileID: 436274877}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -334,7 +330,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 436274870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c702140c0218124f8044b5bfe2b7aa5, type: 3}
+  m_Script: {fileID: 11500000, guid: d9656af6031862443a4c5ecdf0dbcbd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   zDirection: 0
@@ -439,21 +435,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436274870}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af69c198c1b7ce046b7f69980c5b2bc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 32d1f5034e2714f498af810dd3a5c970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatIsGrapplable:
-    serializedVersion: 2
-    m_Bits: 256
-  grapplePointOnPlayer: {fileID: 1536173657}
-  maxDistanceMultiplierForJoint: 0
-  minDistanceMultiplierForJoint: 0
-  JointSpring: 65
-  JointDamper: 7
-  JointMassScale: 4.5
-  DeleteJointThreshold: 2
 --- !u!120 &436274878
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -572,9 +558,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 436274870}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: febd4923771ac9f469a6de727c38d972, type: 3}
+  m_Script: {fileID: 11500000, guid: 9db182cc97ae47d459965081a8393c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGrounded: 1
+  groundedChanged: 0
 --- !u!1 &554003540
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,11 +942,11 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1435189295}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_Material: {fileID: 13400000, guid: d80197c6ff84bd243836dcd91c64c99b, type: 2}
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1435189297
 MeshRenderer:
@@ -1030,8 +1018,8 @@ Rigidbody:
   m_GameObject: {fileID: 1435189295}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0.2
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
