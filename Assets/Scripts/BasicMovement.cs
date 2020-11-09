@@ -19,7 +19,6 @@ public class BasicMovement : MonoBehaviour
 
     // jump buffer
     public float jumpBuffer;
-    bool isGrounded = true;
 
     CapsuleCollider col;
     Rigidbody rig;
@@ -82,13 +81,13 @@ public class BasicMovement : MonoBehaviour
             rig.velocity = new Vector3(rig.velocity.x, rig.velocity.y, 0);
         }
         else
-        {        
+        {
             if (rig.velocity.z == 0 || rig.velocity.z * zDirection < 0)
             {
                 rig.velocity = new Vector3(rig.velocity.x, rig.velocity.y, 0);
-                rig.AddForce(new Vector3(0, 0, zDirection * InitialSpeed * (isGrounded ? 1 : 0.5f)), ForceMode.VelocityChange);
+                rig.AddForce(new Vector3(0, 0, zDirection * InitialSpeed * (controller.isGrounded ? 1 : 0.5f)), ForceMode.VelocityChange);
             }
-            var vel = new Vector3(0, 0, zDirection * Accel * (isGrounded ? 1 : 0.5f));
+            var vel = new Vector3(0, 0, zDirection * Accel * (controller.isGrounded ? 1 : 0.5f));
             rig.AddForce(vel, ForceMode.Acceleration);
         }
 
