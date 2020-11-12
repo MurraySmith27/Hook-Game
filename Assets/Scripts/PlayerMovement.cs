@@ -27,11 +27,14 @@ public class PlayerMovement : MonoBehaviour
     CapsuleCollider collider;
     Rigidbody rigidBody;
 
+    GrapplingScript grapplingScript;
+
     // Start is called before the first frame update
     void Start()
     {
         collider = GetComponent<CapsuleCollider>();
         rigidBody = GetComponent<Rigidbody>();
+        grapplingScript = GetComponent<GrapplingScript>();
     }
 
     void Update(){
@@ -98,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         rigidBody.AddForce(new Vector3(0, jump * jumpForce, 0), ForceMode.Impulse);
 
         MoveVector.z = zvel;
-        if (MoveVector.z != 0){
+        if (MoveVector.z != 0 && !grapplingScript.grappling){
             rigidBody.MovePosition(transform.position + MoveVector * Time.deltaTime);
         }
     }
