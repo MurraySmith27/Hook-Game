@@ -1,29 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class DoorMovement : MonoBehaviour
 {
 
-    public Transform door;
+    Vector3 closedPosition;
+    Vector3 openedPosition;
 
-    public Vector3 closedPosition = new Vector3(0f, 0f, -20f);
-    public Vector3 openedPosition = new Vector3(0f, 7f, -20f);
-
-    public float openSpeed = 5;
-
-    //check if door is open
-    private bool open = false;
-
-    //check if stage is clear
+    float openSpeed = 1;
     private bool clear = false;
+    
+    void Start()
+    {
+        Vector3 cP = new Vector3(transform.position.x, transform .position.y, transform.position.z);
+        Vector3 oP = new Vector3(transform.position.x, transform.position.y + 6.0f, transform.position.z);
+        closedPosition = cP;
+        openedPosition = oP;
+    }
 
-
-    // Update is called once per frame
     void Update()
     {
-        if (GameObject.Find("Enemy") != null)
+        if (GameObject.FindWithTag("Enemy") != null)
         {
             yesEnemy();
         }
@@ -32,41 +32,18 @@ public class DoorMovement : MonoBehaviour
             noEnemy();
         }
 
-        //move to closed position if open
-        //move to open position if closed
-        if (open && clear)
+        if (clear)
         {
-            door.position = Vector3.Lerp(door.position,
+            transform.position = Vector3.Lerp(transform.position,
                 openedPosition, Time.deltaTime * openSpeed);
         }
         else
         {
-            door.position = Vector3.Lerp(door.position,
+            transform.position = Vector3.Lerp(transform.position,
                 closedPosition, Time.deltaTime * openSpeed);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-            openedDoor();
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-            closedDoor();
-    }
-
-    public void closedDoor()
-    {
-        open = false;
-    }
-
-    public void openedDoor()
-    {
-        open = true;
-    }
 
     public void yesEnemy()
     {
