@@ -1,12 +1,37 @@
 fileFormatVersion: 2
 guid: 249f6d6774184dc43af9e12b6acd96e5
 ModelImporter:
-  serializedVersion: 19301
+  serializedVersion: 19300
   internalIDToNameTable:
   - first:
       74: -2322633869350231088
     second: crab_walk
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SHELL
+    second: {fileID: 2100000, guid: e330151fe6e77fe49aa8f1a6cfb9170d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SHELL.001
+    second: {fileID: 2100000, guid: ab94b7b6a13a05c45a9c3aa88c3d58f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SHELL.002
+    second: {fileID: 2100000, guid: 19d9a4304299bce43b32a90391f8e8ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eyes
+    second: {fileID: 2100000, guid: 764b49ec931a7a14898df5741d4d8fb6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pupil
+    second: {fileID: 2100000, guid: 91fd5164daef7624e819772289255770, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -75,7 +100,6 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -113,7 +137,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.01
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
