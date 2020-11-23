@@ -13,16 +13,19 @@ public class MovementController : MonoBehaviour
 
     // components
     Rigidbody rig;
-
+    CapsuleCollider cc;
     // scripts
     BasicMovement bm;
     GrapplingMovement gm;
+    Transform groundDetector;
     
     void Awake()
     {
         rig = GetComponent<Rigidbody>();
+        cc = GetComponent<CapsuleCollider>();
         bm = GetComponent<BasicMovement>();
         gm = GetComponent<GrapplingMovement>();
+        groundDetector = transform.Find("GroundDetector");
     }
 
     // Start is called before the first frame update
@@ -39,7 +42,11 @@ public class MovementController : MonoBehaviour
 
     void FixedUpdate()
     {
-        var isGroundedTemp = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), transform.localScale.y / 2.0f + 0.01f);
+
+        // var isGroundedTemp = Physics.Raycast(transform.position, Vector3.down, transform.localScale.y / 2.0f + 0.01f);
+        // var isGroundedTemp = Physics.Raycast(cc.center, Vector3.down, cc.bounds.extents.y + cc.transform.localPosition.y + 0.01f);
+        // Debug.Log(groundDetector.position.y);
+        var isGroundedTemp = Physics.Raycast(groundDetector.position, Vector3.down, 0.15f);
         groundedChanged = isGrounded != isGroundedTemp;
         isGrounded = isGroundedTemp;
 
