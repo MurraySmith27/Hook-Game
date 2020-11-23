@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class GrapplingMovement : MonoBehaviour
 {
-    const float StopThreshold = 0.6f;
+    const float StopThreshold = 0.1f;
 
     Rigidbody rig;
-    SpringJoint joint;
-
 
     GameObject grappleTo;
     GameObject grappleFrom;
 
+    MovementController controller;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rig = GetComponent<Rigidbody>();
+        controller = GetComponent<MovementController>();
     }
 
     // Update is called once per frame
@@ -26,9 +26,6 @@ public class GrapplingMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && grappleTo == null)
         {
             grappleTo = GetGrapplableUnderCursor();
-
-            if (grappleTo)
-                rig.velocity = Vector3.zero;
         }
         else if (Input.GetMouseButtonDown(1) && grappleFrom == null)
         {
@@ -45,7 +42,9 @@ public class GrapplingMovement : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 8))
+        // do not grapple if there is an abstacle in between
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity)
+            && hit.transform.gameObject.layer == 8)
         {
             return hit.transform.gameObject;
         }
@@ -58,8 +57,6 @@ public class GrapplingMovement : MonoBehaviour
         if (grappleTo == null)
             return;
 
-        rig.useGravity = false;
-
         var src = transform.position;
         var dst = grappleTo.transform.position;
 
@@ -68,10 +65,9 @@ public class GrapplingMovement : MonoBehaviour
         if (distance < StopThreshold)
         {
             grappleTo = null;
-            rig.useGravity = true;
         }
 
-        rig.AddForce(dst - src, ForceMode.Acceleration); 
+        controller.AddForce(dst - src, ForceMode.Acceleration, this); 
     }
 
     void ProcessGrappleFrom()

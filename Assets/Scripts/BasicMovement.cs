@@ -16,9 +16,11 @@ public class BasicMovement : MonoBehaviour
     
     int zDirection;
     bool needToJump;
+    bool anyKeyUp;
 
     // jump buffer
-    public float jumpBuffer;
+    [SerializeField]
+    float jumpBuffer;
 
     CapsuleCollider col;
     Rigidbody rig;
@@ -42,7 +44,7 @@ public class BasicMovement : MonoBehaviour
             needToJump = true;
         }
 
-        // this stuff handles z axis movement        
+        // this stuff handles z axis movement 
         zDirection = Input.GetKeyDown(KeyCode.A) ? -1 : (Input.GetKeyDown(KeyCode.D) ? 1 : zDirection);
 
         if (Input.GetKeyUp(KeyCode.A) && zDirection == -1)
@@ -70,22 +72,23 @@ public class BasicMovement : MonoBehaviour
 
         if (needToJump && jumpBuffer <= 0)
         {
-            rig.AddForce(new Vector3(0, (float)Math.Sqrt(Physics.gravity.y * -2 * JumpDistance), 0), ForceMode.Impulse);
+            controller.AddForce(new Vector3(0, (float)Math.Sqrt(Physics.gravity.y * -2 * JumpDistance), 0), ForceMode.Impulse, this);
         }
 
         needToJump = false;
         jumpBuffer -= Time.fixedDeltaTime;
 
+        // if direction changes
         if (zDirection == 0 && controller.isGrounded)
         {
-            rig.velocity = new Vector3(rig.velocity.x, rig.velocity.y, 0);
+            controller.SetVelocity(new Vector3(rig.velocity.x, rig.velocity.y, 0), this);
         }
         else
         {
             if (rig.velocity.z == 0 || rig.velocity.z * zDirection < 0)
             {
-                rig.velocity = new Vector3(rig.velocity.x, rig.velocity.y, 0);
-                rig.AddForce(new Vector3(0, 0, zDirection * InitialSpeed * (controller.isGrounded ? 1 : 0.5f)), ForceMode.VelocityChange);
+                controller.SetVelocity(new Vector3(rig.velocity.x, rig.velocity.y, 0), this, false);
+                controller.AddForce(new Vector3(0, 0, zDirection * InitialSpeed * (controller.isGrounded ? 1 : 0.5f)), ForceMode.VelocityChange, this);
             }
             var vel = new Vector3(0, 0, zDirection * Accel * (controller.isGrounded ? 1 : 0.5f));
             rig.AddForce(vel, ForceMode.Acceleration);
