@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class GrapplingMovement : MonoBehaviour
 {
-    const float StopThreshold = 0.1f;
+    const float StopThreshold = 0.6f;
 
     Rigidbody rig;
 
     GameObject grappleTo;
     GameObject grappleFrom;
+
+    Vector3? grappleFromDst;
 
     MovementController controller;
     
@@ -34,6 +36,10 @@ public class GrapplingMovement : MonoBehaviour
 
         ProcessGrappleTo();
         ProcessGrappleFrom();
+
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // TODO implement collision checking
+        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     }
 
@@ -73,19 +79,27 @@ public class GrapplingMovement : MonoBehaviour
     void ProcessGrappleFrom()
     {
         if (grappleFrom == null)
+        {
             return;
+        }
+        
+        if (grappleFromDst == null)
+        {
+            grappleFromDst = transform.position;
+        }
         
         var src = grappleFrom.transform.position;
-        var dst = transform.position;
 
-        float distance = Vector3.Distance(src, dst);
+        float distance = Vector3.Distance(src, grappleFromDst.Value);
 
         if (distance < StopThreshold)
         {
             grappleFrom = null;
+            grappleFromDst = null;
+            return;
         }
 
-        grappleFrom.GetComponent<Rigidbody>().AddForce(dst - src, ForceMode.Acceleration);
+        grappleFrom.GetComponent<Rigidbody>().AddForce(grappleFromDst.Value - src, ForceMode.Acceleration);
     }
 
     public bool IsGrapplingTo()
